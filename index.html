@@ -11,6 +11,23 @@
     padding:0;
     box-sizing:border-box;
     font-family: Arial, sans-serif;
+    hidden-img {
+    display: none;
+    margin: 20px auto;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.show {
+    display: block;
+}
+
+.big {
+    width: 300px;
+}
+
+.bigger {
+    width: 400px;
 }
 
 body{
@@ -76,28 +93,46 @@ button{
 
 <div class="container">
     <h1>Em Babi có muốn làm Valentine của anh Babe không? ❤️</h1>
-    <button id="yesBtn" onclick="celebrate()">Yes 💖🥰🥰</button>
-    <button id="noBtn">No 🥺😿</button>
+
+    <div id="message"></div>
+
+    <img id="noImage" src="IMG_5004.jpeg" class="hidden-img">
+    <img id="yesImage" src="IMG_5329.jpeg" class="hidden-img">
+
+    <button id="yesBtn" onclick="handleYes()">Yes 💖🥰🥰</button>
+    <button id="noBtn" onclick="handleNo()">No 🥺🥺</button>
 </div>
 
 <script>
 
 /* NO BUTTON SHRINK + RUN */
 const noBtn = document.getElementById("noBtn");
-let scale = 1;
+let noClickCount = 0;
 
-function moveNo(){
+function moveNo() {
+
+    noClickCount++;
+
+    let img = document.getElementById("noImage");
+
+    if (!img) {
+        img = document.createElement("img");
+        img.id = "noImage";
+        img.src = "IMG_5004.jpeg";
+        img.style.marginTop = "20px";
+        img.style.borderRadius = "20px";
+        document.querySelector(".container").appendChild(img);
+    }
+
+    img.style.width = (150 + noClickCount * 50) + "px";
+
     const x = Math.random() * (window.innerWidth - 100);
     const y = Math.random() * (window.innerHeight - 50);
+
+    noBtn.style.position = "absolute";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-
-    scale -= 0.1;
-    if(scale > 0){
-        noBtn.style.transform = `scale(${scale})`;
-    }
 }
-
 noBtn.addEventListener("mouseover", moveNo);
 noBtn.addEventListener("click", moveNo); // mobile support
 
@@ -109,6 +144,8 @@ function celebrate(){
                 Anh biết mà 😘❤️
             </h1>
             <h2>Yêu em Babi nhiều lắm!</h2>
+            <img src="IMG_5329.jpeg" 
+                 style="width:300px; margin-top:20px; border-radius:20px;">
         </div>
     `;
 
