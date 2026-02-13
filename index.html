@@ -175,8 +175,7 @@ function handleYes() {
 
     // Ẩn nút No
     noBtn.style.display = "none";
-
-yesBtn.addEventListener("click", handleYes);
+    // pháo hoa
     for(let i=0;i<120;i++){
         let fire = document.createElement("div");
         fire.classList.add("firework");
@@ -190,6 +189,9 @@ yesBtn.addEventListener("click", handleYes);
         setTimeout(()=>{fire.remove()},1000);
     }
 }
+
+yesBtn.addEventListener("click", handleYes);
+    
 </script>
 
 </body>
