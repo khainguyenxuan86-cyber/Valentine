@@ -127,10 +127,19 @@ function handleNo() {
 
     // Nút nhỏ dần
     let newSize = 18 - noClickCount * 2;
-    if (newSize < 8) newSize = 8;
+    if (newSize < 6) newSize = 6;
 
     noBtn.style.fontSize = newSize + "px";
     noBtn.style.padding = (12 - noClickCount) + "px " + (25 - noClickCount * 2) + "px";
+
+    Sau 5 lần bấm → biến mất luôn
+    if (noClickCount >= 5) {
+        noBtn.style.display = "none";
+
+        message.innerHTML = `
+            <h2>Em hết quyền từ chối rồi 😌❤️</h2>
+        `;
+    }
 }
 
 // Nút No chạy trốn khi hover
@@ -169,6 +178,19 @@ function handleYes() {
 }
 
 yesBtn.addEventListener("click", handleYes);
+    for(let i=0;i<120;i++){
+        let fire = document.createElement("div");
+        fire.classList.add("firework");
+        fire.style.background = "hsl(" + Math.random()*360 + ",100%,60%)";
+        fire.style.left = "50%";
+        fire.style.top = "50%";
+        fire.style.setProperty('--x',(Math.random()-0.5)*500 + "px");
+        fire.style.setProperty('--y',(Math.random()-0.5)*500 + "px");
+        document.body.appendChild(fire);
+
+        setTimeout(()=>{fire.remove()},1000);
+    }
+}
     
 </script>
 
