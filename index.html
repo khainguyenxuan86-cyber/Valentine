@@ -175,21 +175,27 @@ function handleYes() {
 
     // Ẩn nút No
     noBtn.style.display = "none";
-    
-    // pháo hoa
-    for(let i=0;i<120;i++){
+
+    // 🎆 PHÁO HOA
+    for(let i = 0; i < 120; i++) {
         let fire = document.createElement("div");
         fire.classList.add("firework");
+
         fire.style.background = "hsl(" + Math.random()*360 + ",100%,60%)";
         fire.style.left = "50%";
         fire.style.top = "50%";
-        fire.style.setProperty('--x',(Math.random()-0.5)*500 + "px");
-        fire.style.setProperty('--y',(Math.random()-0.5)*500 + "px");
+
+        fire.style.setProperty("--x", (Math.random()-0.5)*500 + "px");
+        fire.style.setProperty("--y", (Math.random()-0.5)*500 + "px");
+
         document.body.appendChild(fire);
 
-        setTimeout(()=>{fire.remove()},1000);
+        setTimeout(() => {
+            fire.remove();
+        }, 1000);
     }
 }
+
 yesBtn.addEventListener("click", handleYes);
     
 </script>
