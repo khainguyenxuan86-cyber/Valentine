@@ -11,7 +11,8 @@
     padding:0;
     box-sizing:border-box;
     font-family: Arial, sans-serif;
-    hidden-img {
+}
+    .hidden-img {
     display: none;
     margin: 20px auto;
     border-radius: 20px;
@@ -105,64 +106,61 @@ button{
 
 <script>
 
-/* NO BUTTON SHRINK + RUN */
 const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const noImage = document.getElementById("noImage");
+const yesImage = document.getElementById("yesImage");
+const message = document.getElementById("message");
+
 let noClickCount = 0;
 
-function moveNo() {
+/* NO BUTTON */
+function handleNo() {
 
     noClickCount++;
 
-    let img = document.getElementById("noImage");
+    // Hiện ảnh 5004
+    noImage.classList.add("show");
 
-    if (!img) {
-        img = document.createElement("img");
-        img.id = "noImage";
-        img.src = "IMG_5004.jpeg";
-        img.style.marginTop = "20px";
-        img.style.borderRadius = "20px";
-        document.querySelector(".container").appendChild(img);
-    }
+    // Phóng to dần
+    noImage.style.width = (150 + noClickCount * 40) + "px";
 
-    img.style.width = (150 + noClickCount * 50) + "px";
+    // Nút chạy trốn
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
 
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-
-    noBtn.style.position = "absolute";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
-noBtn.addEventListener("mouseover", moveNo);
-noBtn.addEventListener("click", moveNo); // mobile support
 
-/* YES FIREWORK */
-function celebrate(){
-    document.body.innerHTML = `
-        <div style="text-align:center;">
-            <h1 style="font-size:clamp(28px,6vw,50px);">
-                Anh biết mà 😘❤️
-            </h1>
-            <h2>Yêu em Babi nhiều lắm!</h2>
-            <img src="IMG_5329.jpeg" 
-                 style="width:300px; margin-top:20px; border-radius:20px;">
-        </div>
+noBtn.addEventListener("mouseover", handleNo);
+noBtn.addEventListener("click", handleNo);
+
+
+/* YES BUTTON */
+function handleYes() {
+
+    // Ẩn ảnh 5004
+    noImage.classList.remove("show");
+
+    // Hiện ảnh 5329
+    yesImage.classList.add("show");
+    yesImage.style.width = "300px";
+
+    // Đổi chữ
+    message.innerHTML = `
+        <h1 style="font-size:clamp(28px,6vw,50px);">
+            Anh biết mà 😘❤️
+        </h1>
+        <h2>Yêu em Babi nhiều lắm!</h2>
     `;
 
-    for(let i=0;i<120;i++){
-        let fire = document.createElement("div");
-        fire.classList.add("firework");
-        fire.style.background = "hsl(" + Math.random()*360 + ",100%,60%)";
-        fire.style.left = "50%";
-        fire.style.top = "50%";
-        fire.style.setProperty('--x',(Math.random()-0.5)*500 + "px");
-        fire.style.setProperty('--y',(Math.random()-0.5)*500 + "px");
-        document.body.appendChild(fire);
-
-        setTimeout(()=>{fire.remove()},1000);
-    }
+    // Ẩn nút No
+    noBtn.style.display = "none";
 }
 
+yesBtn.addEventListener("click", handleYes);
+    
 </script>
 
 </body>
