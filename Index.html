@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Valentine ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
+
+/* Container */
+.container{
+    padding:20px;
+}
+
+h1{
+    font-size:clamp(22px,5vw,40px);
+    margin-bottom:30px;
+}
+
+/* Buttons */
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:#ff2e63;
+    color:white;
+}
+
+#noBtn{
+    background:#333;
+    color:white;
+    position:absolute;
+}
+
+/* Firework */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+    0%{transform:translate(0,0);opacity:1;}
+    100%{transform:translate(var(--x),var(--y));opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Em Babi có muốn làm Valentine của anh Babe không? ❤️</h1>
+    <button id="yesBtn" onclick="celebrate()">Yes 💖</button>
+    <button id="noBtn">No 😏</button>
+</div>
+
+<script>
+
+/* NO BUTTON SHRINK + RUN */
+const noBtn = document.getElementById("noBtn");
+let scale = 1;
+
+function moveNo(){
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    scale -= 0.1;
+    if(scale > 0){
+        noBtn.style.transform = `scale(${scale})`;
+    }
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo); // mobile support
+
+/* YES FIREWORK */
+function celebrate(){
+    document.body.innerHTML = `
+        <div style="text-align:center;">
+            <h1 style="font-size:clamp(28px,6vw,50px);">
+                Anh biết mà 😘❤️
+            </h1>
+            <h2>Yêu em Babi nhiều lắm!</h2>
+        </div>
+    `;
+
+    for(let i=0;i<120;i++){
+        let fire = document.createElement("div");
+        fire.classList.add("firework");
+        fire.style.background = "hsl(" + Math.random()*360 + ",100%,60%)";
+        fire.style.left = "50%";
+        fire.style.top = "50%";
+        fire.style.setProperty('--x',(Math.random()-0.5)*500 + "px");
+        fire.style.setProperty('--y',(Math.random()-0.5)*500 + "px");
+        document.body.appendChild(fire);
+
+        setTimeout(()=>{fire.remove()},1000);
+    }
+}
+
+</script>
+
+</body>
+</html>
